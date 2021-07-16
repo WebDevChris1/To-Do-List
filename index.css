@@ -82,13 +82,14 @@ li {
 }
 
 i {
-  color: red;
-  font-size: 1rem;
+  color: rgb(238, 139, 139);
+  font-size: 0.9rem;
   cursor: pointer;
 }
 
 i:hover {
-  font-size: 1.1rem;
+  font-size: 1rem;
+  color: red;
 }
 
 #delete-btn {
