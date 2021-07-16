@@ -49,5 +49,18 @@ function render(items) {
 
 function remove(clicked_id) {
   let btnId = clicked_id;
-  console.log(btnId);
+  let listItemIds = document.querySelectorAll("#to-do-list li[id]");
+  let listItemId = [];
+  for (let i = 0; i < listItemIds.length; i++) {
+    listItemId.push(+listItemIds[i].id);
+  }
+
+  for (let i = 0; i < listItemId.length; i++) {
+    itemId = listItemId[i];
+    if (btnId === itemId) {
+      console.log("match");
+    } else {
+      console.log("nothing");
+    }
+  }
 }
