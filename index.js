@@ -32,14 +32,22 @@ deleteBtn.addEventListener("click", function () {
   toDoList.textContent = "";
   toDoEntryNum = 0;
   toDoEntry = [];
+  entryId = [];
   deleteBtn.setAttribute("style", "display: none");
   toDoContainer.removeAttribute("class");
 });
 
 function render(items) {
   let listItems = [];
+  let itemId = 1;
   for (let i = 0; i < items.length; i++) {
-    listItems += `<li>${items[i]}<i class="fas fa-trash-alt"></i></li>`;
+    listItems += `<li id="${itemId}">${items[i]}<button onClick="remove(this.id)" id="${itemId}"><i class="fas fa-trash-alt"></i></button></li>`;
     toDoList.innerHTML = listItems;
+    itemId += 1;
   }
+}
+
+function remove(clicked_id) {
+  let btnId = clicked_id;
+  console.log(btnId);
 }
