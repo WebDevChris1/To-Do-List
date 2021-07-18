@@ -41,26 +41,43 @@ function render(items) {
   let listItems = [];
   let itemId = 1;
   for (let i = 0; i < items.length; i++) {
-    listItems += `<li id="${itemId}">${items[i]}<button onClick="remove(this.id)" id="${itemId}"><i class="fas fa-trash-alt"></i></button></li>`;
+    listItems += `<li id="${itemId}">${items[i]}<button onClick="removeTask(${itemId})"><i class="fas fa-trash-alt"></i></button></li>`;
     toDoList.innerHTML = listItems;
     itemId += 1;
   }
 }
 
-function remove(clicked_id) {
-  let btnId = clicked_id;
+function removeTask(itemId) {
+  let item = document.getElementById(itemId);
+  toDoList.removeChild(item);
   let listItemIds = document.querySelectorAll("#to-do-list li[id]");
-  let listItemId = [];
+  let newToDoList = [];
+  let newToDoEntry = [];
   for (let i = 0; i < listItemIds.length; i++) {
-    listItemId.push(+listItemIds[i].id);
+    newToDoList.push(listItemIds[i].id);
   }
-
-  for (let i = 0; i < listItemId.length; i++) {
-    itemId = listItemId[i];
-    if (btnId === itemId) {
-      console.log("match");
-    } else {
-      console.log("nothing");
-    }
+  for (let i = 0; i < newToDoList.length; i++) {
+    let listItemId = document.getElementById(+newToDoList[i]).value;
+    newToDoEntry.push(listItemId);
   }
+  toDoEntry = newToDoEntry;
+  localStorage.setItem("toDo", JSON.stringify(toDoEntry));
 }
+
+// function removeTask(clicked_id) {
+//   let btnId = clicked_id;
+//   let listItemIds = document.querySelectorAll("#to-do-list li[class]");
+//   let listItemId = [];
+//   for (let i = 0; i < listItemIds.length; i++) {
+//     listItemId.push(listItemIds[i].id);
+//   }
+//   for (let i = 0; i < listItemId.length; i++) {
+//     let itemId = listItemId[i];
+//     if (btnId === itemId) {
+//       toDoEntry.splice(i, i);
+//       let removeItemId = document.getElementByClass(+itemId);
+//       removeItemId.remove();
+//       console.log(toDoEntry);
+//     }
+//   }
+// }
