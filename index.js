@@ -8,7 +8,7 @@ const saveBtn = document.getElementById("save-btn");
 let toDoEntryNum = 0;
 let toDoEntry = [];
 
-if (toDoLocalStorage) {
+if (toDoLocalStorage > 0) {
   toDoContainer.setAttribute("class", `box container-2`);
   deleteBtn.removeAttribute("style");
   toDoEntry = toDoLocalStorage;
@@ -50,34 +50,10 @@ function render(items) {
 function removeTask(itemId) {
   let item = document.getElementById(itemId);
   toDoList.removeChild(item);
-  let listItemIds = document.querySelectorAll("#to-do-list li[id]");
-  let newToDoList = [];
-  let newToDoEntry = [];
-  for (let i = 0; i < listItemIds.length; i++) {
-    newToDoList.push(listItemIds[i].id);
+  let lisItems = document.getElementsByTagName("li");
+  toDoEntry = [];
+  for (var i = 0; i < lisItems.length; ++i) {
+    toDoEntry.push(lisItems[i].textContent);
+    localStorage.setItem("toDo", JSON.stringify(toDoEntry));
   }
-  for (let i = 0; i < newToDoList.length; i++) {
-    let listItemId = document.getElementById(+newToDoList[i]).value;
-    newToDoEntry.push(listItemId);
-  }
-  toDoEntry = newToDoEntry;
-  localStorage.setItem("toDo", JSON.stringify(toDoEntry));
 }
-
-// function removeTask(clicked_id) {
-//   let btnId = clicked_id;
-//   let listItemIds = document.querySelectorAll("#to-do-list li[class]");
-//   let listItemId = [];
-//   for (let i = 0; i < listItemIds.length; i++) {
-//     listItemId.push(listItemIds[i].id);
-//   }
-//   for (let i = 0; i < listItemId.length; i++) {
-//     let itemId = listItemId[i];
-//     if (btnId === itemId) {
-//       toDoEntry.splice(i, i);
-//       let removeItemId = document.getElementByClass(+itemId);
-//       removeItemId.remove();
-//       console.log(toDoEntry);
-//     }
-//   }
-// }
