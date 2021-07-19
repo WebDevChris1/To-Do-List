@@ -8,7 +8,7 @@ const saveBtn = document.getElementById("save-btn");
 let toDoEntryNum = 0;
 let toDoEntry = [];
 
-if (toDoLocalStorage > 0) {
+if (toDoLocalStorage) {
   toDoContainer.setAttribute("class", `box container-2`);
   deleteBtn.removeAttribute("style");
   toDoEntry = toDoLocalStorage;
@@ -54,6 +54,7 @@ function removeTask(itemId) {
   toDoEntry = [];
   for (var i = 0; i < lisItems.length; ++i) {
     toDoEntry.push(lisItems[i].textContent);
+    console.log(toDoEntry);
     localStorage.setItem("toDo", JSON.stringify(toDoEntry));
   }
 }
