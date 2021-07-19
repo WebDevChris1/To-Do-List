@@ -41,7 +41,7 @@ function render(items) {
   let listItems = [];
   let itemId = 1;
   for (let i = 0; i < items.length; i++) {
-    listItems += `<li id="${itemId}">${items[i]}<button onClick="removeTask(${itemId})"><i class="fas fa-trash-alt"></i></button></li>`;
+    listItems += `<li id="${itemId}">&#8594; ${items[i]}<button onClick="removeTask(${itemId})"><i class="fas fa-trash-alt"></i></button></li>`;
     toDoList.innerHTML = listItems;
     itemId += 1;
   }
@@ -56,5 +56,10 @@ function removeTask(itemId) {
     toDoEntry.push(lisItems[i].textContent);
     console.log(toDoEntry);
     localStorage.setItem("toDo", JSON.stringify(toDoEntry));
+  }
+  if (toDoEntry.length === 0) {
+    localStorage.clear();
+    deleteBtn.setAttribute("style", "display: none");
+    toDoContainer.removeAttribute("class");
   }
 }
