@@ -107,3 +107,10 @@ i:hover {
   color: black;
   cursor: pointer;
 }
+
+p {
+  font-size: 15px;
+  font-weight: lighter;
+  color: grey;
+  align-self: flex-start;
+}
