@@ -1,3 +1,4 @@
+// Grab Elements
 const toDoInput = document.getElementById("to-do-input");
 const addBtn = document.getElementById("add-btn");
 const toDoContainer = document.getElementById("to-do-list-container-2");
@@ -9,14 +10,15 @@ const total = document.getElementById("total");
 let toDoEntryNum = 0;
 let toDoEntry = [];
 
+// Local Storage
 if (toDoLocalStorage) {
   toDoContainer.setAttribute("class", `box container-2`);
   deleteBtn.removeAttribute("style");
   toDoEntry = toDoLocalStorage;
-  totalTaskCount(toDoEntry);
   render(toDoEntry);
 }
 
+// Add a Task
 addBtn.addEventListener("click", function () {
   toDoEntryNum += 1;
   if (toDoEntryNum > 0) {
@@ -29,6 +31,7 @@ addBtn.addEventListener("click", function () {
   render(toDoEntry);
 });
 
+// Delete All Tasks
 deleteBtn.addEventListener("click", function () {
   localStorage.clear();
   toDoList.textContent = "";
@@ -40,6 +43,7 @@ deleteBtn.addEventListener("click", function () {
   totalTaskCount(toDoEntry);
 });
 
+// Render Tasks
 function render(items) {
   let listItems = [];
   let itemId = 1;
@@ -51,6 +55,7 @@ function render(items) {
   }
 }
 
+// Delete Individual Tasks
 function removeTask(itemId) {
   let item = document.getElementById(itemId);
   toDoList.removeChild(item);
@@ -61,17 +66,14 @@ function removeTask(itemId) {
     localStorage.setItem("toDo", JSON.stringify(toDoEntry));
   }
   totalTaskCount(toDoEntry);
-  // if (toDoEntry > 1) {
-  //   total.removeAttribute("style");
-  // }
   if (toDoEntry.length === 0) {
     localStorage.clear();
     deleteBtn.setAttribute("style", "display: none");
     toDoContainer.removeAttribute("class");
-    // total.setAttribute("style", "display: none");
   }
 }
 
+// Total Task Count
 function totalTaskCount(entry) {
   let totalTask = "Total: " + entry.length;
   total.textContent = totalTask;
